@@ -66,7 +66,7 @@ public class JavaToLuaTranspiler {
                     AnnotationsAttribute attr = AnnotationsAttribute.fromData(file, a.getData());
                     for(AnnotationInfo an : attr.getAnnotations()) {
                         if(an.getClassName().equals("Leu/bebendorf/transpiler/interop/LuaImpl;")) {
-                            LuaFunction code = new LuaFunction("v", "l", "s");
+                            LuaFunction code = new LuaFunction("v", "t", "l", "s");
                             code.getCode().addAll(Stream.of(((AnnotationInfo.ArrayValue) an.getResolvedValues().get("value")).getArray()).map(e -> ((AnnotationInfo.StringValue) e).getString()).collect(Collectors.toList()));
                             mt.set("code", code);
                         }
@@ -80,7 +80,7 @@ public class JavaToLuaTranspiler {
     }
 
     private static LuaFunction codeToLua(ClassFile cf, byte[] code) {
-        LuaFunction fn = new LuaFunction("v", "l", "s");
+        LuaFunction fn = new LuaFunction("v", "t", "l", "s");
         List<Instruction> instructions = CodeParser.parse(code);
         for(int i=0; i<instructions.size(); i++) {
             Instruction ins = instructions.get(i);
@@ -101,7 +101,7 @@ public class JavaToLuaTranspiler {
                     break;
                 case GETSTATIC: {
                     FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
-                    fn.getCode().add("table.insert(s,1,v.getstatic(\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\"))");
+                    fn.getCode().add("table.insert(s,1,v.getstatic(t,\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\"))");
                     break;
                 }
                 case LDC:
@@ -268,8 +268,10 @@ public class JavaToLuaTranspiler {
                 case INVOKEVIRTUAL: {
                     MethodRefConstant mr = cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex()).asMethod();
                     String descriptor = mr.getDescriptor(cf);
-                    int params = new MethodDescriptor(descriptor).getParameterTypes().size();
-                    fn.getCode().add("table.insert(s,1,v.invoke(\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "table.remove(s," + (params - ind + 1) + ")").collect(Collectors.joining(",")) + "}))");
+                    MethodDescriptor md = new MethodDescriptor(descriptor);
+                    int params = md.getParameterTypes().size();
+                    String invoke = "v.invoke(t,\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "table.remove(s," + (params - ind + 1) + ")").collect(Collectors.joining(",")) + "})";
+                    fn.getCode().add(md.getReturnType().equals("V") ? invoke : ("table.insert(s,1," + invoke + ")"));
                     break;
                 }
                 case ICONST_M1:
@@ -319,7 +321,7 @@ public class JavaToLuaTranspiler {
                     break;
                 case PUTSTATIC: {
                     FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
-                    fn.getCode().add("v.setstatic(\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\",table.remove(s,1))");
+                    fn.getCode().add("v.setstatic(t,\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\",table.remove(s,1))");
                     break;
                 }
                 case ARRAYLENGTH:
@@ -344,8 +346,19 @@ public class JavaToLuaTranspiler {
                     fn.getCode().add("if table.remove(s,1) ~= nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getOffset()) + " end");
                     break;
                 case ATHROW:
-                    fn.getCode().add("error(table.remove(s,1))");
+                    fn.getCode().add("t.exception = table.remove(s,1)");
+                    fn.getCode().add("error(\"JavaException\")");
                     break;
+                case GETFIELD: {
+                    FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
+                    fn.getCode().add("table.insert(s,1,v.getfield(t,\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\",table.remove(s,1)))");
+                    break;
+                }
+                case PUTFIELD: {
+                    FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
+                    fn.getCode().add("v.putfield(t,\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\",table.remove(s,2),table.remove(s,1))");
+                    break;
+                }
                 default:
                     fn.getCode().add("-- " + ins.getCode().name());
                     break;

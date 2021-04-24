@@ -16,7 +16,7 @@ public class ManualTest {
     public static void main(String[] args) throws IOException {
         writeFile(new File("JavaTranspiler-Lua/lua/system.lua"), "return " + JavaToLuaTranspiler.toLua(new JavaStdClassFileSource(new JavaJarClassFileSource(new File("JavaTranspiler-StdLib/target/JavaTranspiler-StdLib-1.0-SNAPSHOT.jar"))).get()).toLua());
         writeFile(new File("JavaTranspiler-Lua/lua/user.lua"), "return " + JavaToLuaTranspiler.toLua(new JavaMultiClassFileSource(
-                new JavaSingleClassFileSource(new File("Test.class"))
+                new JavaSingleClassFileSource(new File("test/Test.class"))
         ).get()).toLua());
     }
 
