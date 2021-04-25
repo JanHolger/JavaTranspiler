@@ -10,7 +10,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/io/OutputStream","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -51,7 +51,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -94,7 +94,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/Object;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -107,7 +107,7 @@ array_unshift($s,[
 ]);
 ins12:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -135,7 +135,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -148,7 +148,7 @@ array_unshift($s,[
 ]);
 ins12:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -176,7 +176,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(I)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -189,7 +189,7 @@ array_unshift($s,[
 ]);
 ins12:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -219,12 +219,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -252,12 +252,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(F)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -285,12 +285,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(D)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -318,12 +318,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(C)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -351,12 +351,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(J)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -384,12 +384,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Z)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -431,12 +431,12 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(I)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 ins9:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","print","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -464,7 +464,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/io/FilterOutputStream","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -507,7 +507,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","(Ljava/lang/Throwable;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -533,7 +533,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -563,7 +563,7 @@ ins6:
 array_unshift($s,$l[2]);
 ins7:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",[array_splice($s,2,1)[0],array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -591,7 +591,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -634,7 +634,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/Exception","<init>","(Ljava/lang/Throwable;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -660,7 +660,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Exception","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -688,7 +688,7 @@ ins5:
 array_unshift($s,$l[2]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/Exception","<init>","(Ljava/lang/Throwable;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -716,7 +716,7 @@ ins5:
 array_unshift($s,$l[1]);
 ins6:
 array_unshift($s,$v->invoke($t, "java/lang/Exception","<init>","(Ljava/lang/String;)V",[array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -815,7 +815,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -856,7 +856,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -924,7 +924,7 @@ ins6:
 array_unshift($s,$l[1]);
 ins7:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",[array_splice($s,2,1)[0],array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -950,7 +950,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -976,7 +976,7 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);
@@ -1018,7 +1018,7 @@ ins6:
 array_unshift($s, NULL);
 ins7:
 array_unshift($s,$v->invoke($t, "java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",[array_splice($s,2,1)[0],array_splice($s,1,1)[0],array_splice($s,0,1)[0]]));
-if (array_key_exists("exception", $t)) {
+if ($t['exception'] != NULL) {
 goto ret;
 }
 array_shift($s);

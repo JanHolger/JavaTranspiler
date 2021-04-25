@@ -199,70 +199,70 @@ public class JavaToPHPTranspiler {
                     break;
                 }
                 case LUSHR:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] >> array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] >> array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case IUSHR:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] >> array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] >> array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case LADD:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] + array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] + array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case IADD:
-                    fn.getCode().add("array_unshift($s,"+ new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] + array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s,"+ new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] + array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case DADD:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] + array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)['value'] + array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case FADD:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] + array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)['value'] + array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case LSUB:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] - array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] - array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case ISUB:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] - array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] - array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case DSUB:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] - array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)['value'] - array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case FSUB:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] - array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)['value'] - array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case LMUL:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] * array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] * array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case IMUL:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] * array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] * array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case DMUL:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] * array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)['value'] * array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case FMUL:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] * array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)['value'] * array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case LDIV:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] // array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] // array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case IDIV:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] // array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] // array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case DDIV:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] / array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)['value'] / array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case FDIV:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] / array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)['value'] / array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case LREM:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] % array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "J").set("value", new PHPExpression("array_splice($s,1,1)['value'] % array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case IREM:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] % array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "I").set("value", new PHPExpression("array_splice($s,1,1)['value'] % array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case DREM:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] % array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "D").set("value", new PHPExpression("array_splice($s,1,1)['value'] % array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case FREM:
-                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)[\"value\"] % array_splice($s,0,1)[\"value\"]")).toPHP() + ");");
+                    fn.getCode().add("array_unshift($s," + new PHPArray().setString("type", "F").set("value", new PHPExpression("array_splice($s,1,1)['value'] % array_splice($s,0,1)['value']")).toPHP() + ");");
                     break;
                 case INVOKESPECIAL:
                 case INVOKESTATIC:
@@ -273,13 +273,13 @@ public class JavaToPHPTranspiler {
                     int params = new MethodDescriptor(descriptor).getParameterTypes().size();
                     fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_splice($s," + (params - ind) + ",1)[0]").collect(Collectors.joining(",")) + "]));");
                     List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
-                    fn.getCode().add("if (array_key_exists(\"exception\", $t)) {");
+                    fn.getCode().add("if ($t['exception'] != NULL) {");
                     if (exceptionTable.size() > 0) {
                         exceptionTable.forEach(e -> {
                             fn.getCode().add("if ($v->instanceof($t,$t['exception'],\"L" + e.getCatchTypeName(cf) + ";\")) {");
                             fn.getCode().add("array_shift($s);");
-                            fn.getCode().add("array_unshift($s, $t[\"exception\"]);");
-                            fn.getCode().add("$t[\"exception\"] = NULL;");
+                            fn.getCode().add("array_unshift($s, $t['exception']);");
+                            fn.getCode().add("$t['exception'] = NULL;");
                             fn.getCode().add("goto ins" + (e.getHandlerPC() + 4) + ";");
                             fn.getCode().add("}");
                         });
@@ -344,10 +344,10 @@ public class JavaToPHPTranspiler {
                     fn.getCode().add("array_unshift($s,count(array_shift($s)[\"values\"]));");
                     break;
                 case AALOAD:
-                    fn.getCode().add("array_unshift($s,array_splice($s,1,1)[0][\"values\"][array_shift($s)[\"value\"]]);");
+                    fn.getCode().add("array_unshift($s,array_splice($s,1,1)[0][\"values\"][array_shift($s)['value']]);");
                     break;
                 case AASTORE:
-                    fn.getCode().add("array_splice($s,1,1)[0][\"values\"][array_shift($s)[\"value\"]] = array_shift($s);");
+                    fn.getCode().add("array_splice($s,1,1)[0][\"values\"][array_shift($s)['value']] = array_shift($s);");
                     break;
                 case IFEQ:
                     fn.getCode().add("if (array_shift($s) == 0) goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + ";");

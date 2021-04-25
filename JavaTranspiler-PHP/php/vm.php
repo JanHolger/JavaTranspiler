@@ -20,7 +20,8 @@ class VM {
             'vm' => $this,
             'name' => $name,
             'id' => $this->next_thread_id - 1,
-            'callstack' => []
+            'callstack' => [],
+            'exception' => NULL
         ];
     }
 
@@ -111,8 +112,6 @@ class VM {
     }
 
     public function invoke(&$thread, $class, $method, $descriptor, $args) {
-        //echo "Invoke: ".$class."@".$method."\n";
-        //var_dump($args);
         $stack = [];
         $locals = [];
         foreach ($args as $i => $v) {
