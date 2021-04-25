@@ -4,7 +4,7 @@ import eu.bebendorf.transpiler.JavaJarClassFileSource;
 import eu.bebendorf.transpiler.JavaMultiClassFileSource;
 import eu.bebendorf.transpiler.JavaSingleClassFileSource;
 import eu.bebendorf.transpiler.JavaStdClassFileSource;
-import eu.bebendorf.transpiler.php.PHPToLuaTranspiler;
+import eu.bebendorf.transpiler.php.JavaToPHPTranspiler;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,8 +14,8 @@ import java.nio.charset.StandardCharsets;
 public class ManualTest {
 
     public static void main(String[] args) throws IOException {
-        writeFile(new File("JavaTranspiler-PHP/php/system.php"), "<?php\nfunction loadsystemclasses() { return " + PHPToLuaTranspiler.toPHP(new JavaStdClassFileSource(new JavaJarClassFileSource(new File("JavaTranspiler-StdLib/target/JavaTranspiler-StdLib-1.0-SNAPSHOT.jar"))).get()).toPHP() + ";}");
-        writeFile(new File("JavaTranspiler-PHP/php/user.php"), "<?php\nfunction loaduser() { return " + PHPToLuaTranspiler.toPHP(new JavaMultiClassFileSource(
+        writeFile(new File("JavaTranspiler-PHP/php/system.php"), "<?php\nfunction loadsystemclasses() { return " + JavaToPHPTranspiler.toPHP(new JavaStdClassFileSource(new JavaJarClassFileSource(new File("JavaTranspiler-StdLib/target/JavaTranspiler-StdLib-1.0-SNAPSHOT.jar"))).get()).toPHP() + ";}");
+        writeFile(new File("JavaTranspiler-PHP/php/user.php"), "<?php\nfunction loaduser() { return " + JavaToPHPTranspiler.toPHP(new JavaMultiClassFileSource(
                 new JavaSingleClassFileSource(new File("test/Test.class"))
         ).get()).toPHP() + ";}");
     }

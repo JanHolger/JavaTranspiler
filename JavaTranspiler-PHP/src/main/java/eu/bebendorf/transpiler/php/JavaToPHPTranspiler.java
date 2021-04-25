@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PHPToLuaTranspiler {
+public class JavaToPHPTranspiler {
     public static PHPFunction toPHP(List<ClassFile> files) {
         PHPFunction fn = new PHPFunction("v");
         files.forEach(cf -> fn.getCode().add("$v->classes[\""+cf.getClassName()+"\"] = " + toPHP(cf).toPHP() + ";"));
@@ -271,7 +271,7 @@ public class PHPToLuaTranspiler {
                     String descriptor = mr.getDescriptor(cf);
                     MethodDescriptor md = new MethodDescriptor(descriptor);
                     int params = new MethodDescriptor(descriptor).getParameterTypes().size();
-                    fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_unshift($s," + (params - ind) + ")").collect(Collectors.joining(",")) + "]));");
+                    fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_shift($s)").collect(Collectors.joining(",")) + "]));");
                     List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
                     fn.getCode().add("if (array_key_exists(\"exception\", $t)) {");
                     if (exceptionTable.size() > 0) {
