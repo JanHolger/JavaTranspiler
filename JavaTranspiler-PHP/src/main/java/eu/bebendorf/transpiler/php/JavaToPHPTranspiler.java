@@ -271,7 +271,7 @@ public class JavaToPHPTranspiler {
                     String descriptor = mr.getDescriptor(cf);
                     MethodDescriptor md = new MethodDescriptor(descriptor);
                     int params = new MethodDescriptor(descriptor).getParameterTypes().size();
-                    fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_shift($s)").collect(Collectors.joining(",")) + "]));");
+                    fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_splice($s," + (params - ind) + ")[0]").collect(Collectors.joining(",")) + "]));");
                     List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
                     fn.getCode().add("if (array_key_exists(\"exception\", $t)) {");
                     if (exceptionTable.size() > 0) {
