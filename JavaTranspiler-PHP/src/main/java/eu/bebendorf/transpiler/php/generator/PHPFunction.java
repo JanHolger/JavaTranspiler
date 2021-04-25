@@ -13,7 +13,7 @@ public class PHPFunction implements PHPValue {
     final List<String> code = new ArrayList<>();
 
     public PHPFunction(String... parameters) {
-        this.parameters = Arrays.stream(parameters).map(p -> "$" + p).toArray(String[]::new);
+        this.parameters = Arrays.stream(parameters).map(p -> p.startsWith("&") ? ("&$" + p.substring(1)) : ("$" + p)).toArray(String[]::new);
     }
 
     public String toPHP() {

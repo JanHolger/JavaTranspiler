@@ -24,12 +24,12 @@ class VM {
         ];
     }
 
-    public function getclass($thread, $name) {
-        $c = &$this->classes[$name];
-        if ($c == NULL) {
-            echo "CLASS NOT FOUND!";
+    public function getclass(&$thread, $name) {
+        if (!array_key_exists($name,$this->classes)) {
+            echo "CLASS NOT FOUND! ".$name;
             return NULL;
         }
+        $c = &$this->classes[$name];
         if (!array_key_exists('static', $c)) {
             $c['static'] = [];
             $this->invoke($thread, $name, '<clinit>', '()V', []);
@@ -37,16 +37,22 @@ class VM {
         return $c;
     }
 
-    public function getstatic($thread, $class, $field) {
+    public function getstatic(&$thread, $class, $field) {
         $c = $this->getclass($thread, $class);
         if ($c == NULL) {
-            //Exception
+            echo "CNF";
+            return NULL;
+        }
+        if(!array_key_exists('static', $c)) {
+            return NULL;
+        }
+        if(!array_key_exists($field, $c['static'])) {
             return NULL;
         }
         return $c['static'][$field];
     }
 
-    public function setstatic($thread, $class, $field, $value) {
+    public function setstatic(&$thread, $class, $field, $value) {
          $c = $this->getclass($thread, $class);
          if ($c == NULL) {
             //Exception
@@ -55,8 +61,41 @@ class VM {
          $this->classes[$class]['static'][$field] = $value;
     }
 
-    public function exception_type_check($type, $exception) {
-        return $exception["class"] == $type;
+    public function getfield(&$thread, $class, $field, $instance) {
+        if ($instance == NULL) {
+            echo "NPE\n";
+            return NULL;
+        }
+        if(!array_key_exists('fields', $instance)) {
+            echo "NON OBJECT\n";
+            return NULL;
+        }
+        return $instance['fields'][$field];
+    }
+
+    public function setfield(&$thread, $class, $field, $instance, $value) {
+         if ($instance == NULL) {
+             echo "NPE\n";
+             return NULL;
+         }
+         if(!array_key_exists('fields', $instance)) {
+             echo "NON OBJECT\n";
+             return NULL;
+         }
+         $instance['fields'][$field] = $value;
+    }
+
+    public function instanceof(&$thread, $value, $type) {
+        $isi = 0;
+        if($value != NULL) {
+            if($value['type'] == $type) {
+                $isi = 1;
+            }
+        }
+        return [
+            'type' => 'Z',
+            'value' => $isi
+        ];
     }
 
     public function main($class, ...$args) {
@@ -64,14 +103,16 @@ class VM {
         $ca = [["values" => []]];
         foreach ($args as $_ => $a) {
             array_unshift($ca[0]["values"], [
-                "class" => "java/lang/String",
+                "type" => "Ljava/lang/String;",
                 "value" => $a
             ]);
         }
         $this->invoke($thread, $class, 'main', '([Ljava/lang/String;)V', $ca);
     }
 
-    public function invoke($thread, $class, $method, $descriptor, $args) {
+    public function invoke(&$thread, $class, $method, $descriptor, $args) {
+        //echo "Invoke: ".$class."@".$method."\n";
+        //var_dump($args);
         $stack = [];
         $locals = [];
         foreach ($args as $i => $v) {
@@ -93,8 +134,6 @@ class VM {
             // Exception
             return NULL;
         }
-        if ($class == "Test")
-            echo var_dump($locals);
         $rval = $m["code"]($this, $thread, $locals, $stack);
         return $rval;
     }
