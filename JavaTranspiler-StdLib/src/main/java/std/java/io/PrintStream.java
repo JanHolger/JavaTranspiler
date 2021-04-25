@@ -1,6 +1,7 @@
 package std.java.io;
 
 import eu.bebendorf.transpiler.interop.LuaImpl;
+import eu.bebendorf.transpiler.interop.PHPImpl;
 
 public class PrintStream extends FilterOutputStream {
 
@@ -48,6 +49,7 @@ public class PrintStream extends FilterOutputStream {
     }
 
     @LuaImpl("io.write(l[2].value)")
+    @PHPImpl("echo $l[1][\"value\"];")
     public native void print(String value);
 
 }
