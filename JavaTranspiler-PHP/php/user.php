@@ -1,6 +1,6 @@
 <?php
 function loaduser() { return function($v){
-$v->vm["classes"]["Test"] = [
+$v->classes["Test"] = [
 "super" => "java/lang/Object",
 "methods" => [
 "test" => [

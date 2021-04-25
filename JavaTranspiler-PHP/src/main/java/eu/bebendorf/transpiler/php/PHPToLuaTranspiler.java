@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class PHPToLuaTranspiler {
     public static PHPFunction toPHP(List<ClassFile> files) {
         PHPFunction fn = new PHPFunction("v");
-        files.forEach(cf -> fn.getCode().add("$v->vm[\"classes\"][\""+cf.getClassName()+"\"] = " + toPHP(cf).toPHP() + ";"));
+        files.forEach(cf -> fn.getCode().add("$v->classes[\""+cf.getClassName()+"\"] = " + toPHP(cf).toPHP() + ";"));
         return fn;
     }
 

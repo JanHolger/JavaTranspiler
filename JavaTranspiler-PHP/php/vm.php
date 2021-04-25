@@ -3,10 +3,8 @@ require './base.php';
 require './system.php';
 
 class VM {
-    public $vm = [
-        'classes' => [],
-        'next_thread_id' => 1
-    ];
+    public $classes = [];
+    public $next_thread_id = 1;
 
     public function __construct () {
         loadbaseclasses($this);
@@ -14,20 +12,20 @@ class VM {
     }
 
     public function newthread ($name) {
-        $this->vm['next_thread_id'] = $this->vm['next_thread_id'] + 1;
+        $this->next_thread_id++;
         if ($name == NULL) {
-            $name = "Thread #" . strval($this->vm['next_thread_id'] - 1);
+            $name = "Thread #" . strval($this->next_thread_id - 1);
         }
         return [
             'vm' => $this,
             'name' => $name,
-            'id' => $this->vm['next_thread_id'] - 1,
+            'id' => $this->next_thread_id - 1,
             'callstack' => []
         ];
     }
 
     public function getclass($thread, $name) {
-        $c = &$this->vm['classes'][$name];
+        $c = &$this->classes[$name];
         if ($c == NULL) {
             echo "CLASS NOT FOUND!";
             return NULL;
@@ -54,7 +52,7 @@ class VM {
             //Exception
             return NULL;
          }
-         $this->vm['classes'][$class]['static'][$field] = $value;
+         $this->classes[$class]['static'][$field] = $value;
     }
 
     public function main($class, ...$args) {

@@ -1,6 +1,6 @@
 <?php
 function loadbaseclasses($v) {
-    $v->vm["classes"]["java/lang/Object"] = [
+    $v->classes["java/lang/Object"] = [
         "name" => "java/lang/Object",
         "super" => "java/lang/Object",
         "flags" => [

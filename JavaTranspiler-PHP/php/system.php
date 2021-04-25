@@ -1,6 +1,6 @@
 <?php
 function loadsystemclasses() { return function($v){
-$v->vm["classes"]["java/io/FilterOutputStream"] = [
+$v->classes["java/io/FilterOutputStream"] = [
 "super" => "java/io/OutputStream",
 "methods" => [
 "<init>" => [
@@ -37,7 +37,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/io/OutputStream"] = [
+$v->classes["java/io/OutputStream"] = [
 "super" => "java/lang/Object",
 "methods" => [
 "<init>" => [
@@ -74,7 +74,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/io/PrintStream"] = [
+$v->classes["java/io/PrintStream"] = [
 "super" => "java/io/FilterOutputStream",
 "methods" => [
 "println" => [
@@ -410,7 +410,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/lang/Exception"] = [
+$v->classes["java/lang/Exception"] = [
 "super" => "java/lang/Throwable",
 "methods" => [
 "<init>" => [
@@ -521,7 +521,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/lang/RuntimeException"] = [
+$v->classes["java/lang/RuntimeException"] = [
 "super" => "java/lang/Exception",
 "methods" => [
 "<init>" => [
@@ -630,7 +630,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/lang/String"] = [
+$v->classes["java/lang/String"] = [
 "super" => "java/lang/Object",
 "methods" => [
 "valueOf" => [
@@ -725,7 +725,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/lang/System"] = [
+$v->classes["java/lang/System"] = [
 "super" => "java/lang/Object",
 "methods" => [
 "<init>" => [
@@ -762,7 +762,7 @@ return array_unshift($s);
 "native" => false
 ]
 ];
-$v->vm["classes"]["java/lang/Throwable"] = [
+$v->classes["java/lang/Throwable"] = [
 "super" => "java/lang/Object",
 "methods" => [
 "getMessage" => [
