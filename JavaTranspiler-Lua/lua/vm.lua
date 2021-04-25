@@ -53,21 +53,34 @@ return function()
     vm.putfield = function(thread, class, field, instance, value)
         instance.fields[field] = value
     end
-    vm.exception_type_check = function(type, exception)
-        return exception.class == type
+    vm.instanceof = function(thread, value, type)
+        local isi = 0
+        if value ~= nil then
+            if value.type == type then
+                isi = 1
+            else
+            end
+        end
+        return {
+            type = "Z",
+            value = isi
+        }
     end
     vm.main = function(class, ...)
         local thread = vm.newthread("Main")
         local args = {...}
-        local ca = {{values = {}}}
+        local ca = { vm.newarray(thread,'Ljava/lang/String;',#args) }
         for _,a in ipairs(args) do
-            table.insert(ca[1].values, { class="java/lang/String", value=a })
+            table.insert(ca[1].values, { type="Ljava/lang/String;", value=a })
         end
         vm.invoke(thread,class,'main','([Ljava/lang/String;)V', ca)
         if thread.exception ~= nil then
-            print(thread.exception.class)
+            print(thread.exception.type)
             print(thread.exception.fields.message.value)
         end
+    end
+    vm.newarray = function(thread, class, length)
+        return { type="["..class, length = length, values = {}}
     end
     vm.invoke = function(thread, class, method, descriptor, args)
         local stack = {}
