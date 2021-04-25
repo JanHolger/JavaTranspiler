@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 public class Instruction {
 
     OpCode code;
-    int offset;
+    int address;
     byte[] bytes;
 
     public interface Constructor {

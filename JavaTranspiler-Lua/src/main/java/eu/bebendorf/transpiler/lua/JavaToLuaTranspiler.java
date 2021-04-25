@@ -4,6 +4,8 @@ import eu.bebendorf.bytecodemanipulator.ClassFile;
 import eu.bebendorf.bytecodemanipulator.MethodDescriptor;
 import eu.bebendorf.bytecodemanipulator.attribute.AnnotationInfo;
 import eu.bebendorf.bytecodemanipulator.attribute.AnnotationsAttribute;
+import eu.bebendorf.bytecodemanipulator.attribute.CodeAttribute;
+import eu.bebendorf.bytecodemanipulator.attribute.ExceptionTableEntry;
 import eu.bebendorf.bytecodemanipulator.constant.*;
 import eu.bebendorf.bytecodemanipulator.instruction.*;
 import eu.bebendorf.transpiler.lua.generator.LuaExpression;
@@ -58,7 +60,7 @@ public class JavaToLuaTranspiler {
             m.getAttributes().forEach(a -> {
                 String aName = a.getName();
                 if(aName.equalsIgnoreCase("code"))
-                    mt.set("code", codeToLua(file, a.asCode().getCode()));
+                    mt.set("code", codeToLua(file, a.asCode()));
                 if(aName.equalsIgnoreCase("runtimevisibleannotations")) {
                     // Add Annotations for later reflection
                 }
@@ -79,14 +81,12 @@ public class JavaToLuaTranspiler {
         return ct;
     }
 
-    private static LuaFunction codeToLua(ClassFile cf, byte[] code) {
+    private static LuaFunction codeToLua(ClassFile cf, CodeAttribute attr) {
         LuaFunction fn = new LuaFunction("v", "t", "l", "s");
-        List<Instruction> instructions = CodeParser.parse(code);
+        List<Instruction> instructions = CodeParser.parse(attr.getCode());
         for(int i=0; i<instructions.size(); i++) {
             Instruction ins = instructions.get(i);
-            if(ins.getCode() == OpCode.NOP)
-                continue;
-            fn.getCode().add("::ins" + ins.getOffset() + "::");
+            fn.getCode().add("::ins" + ins.getAddress() + "::");
             switch (ins.getCode()) {
                 case RETURN:
                     fn.getCode().add("table.insert(s,1,nil)");
@@ -270,8 +270,23 @@ public class JavaToLuaTranspiler {
                     String descriptor = mr.getDescriptor(cf);
                     MethodDescriptor md = new MethodDescriptor(descriptor);
                     int params = md.getParameterTypes().size();
-                    String invoke = "v.invoke(t,\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "table.remove(s," + (params - ind + 1) + ")").collect(Collectors.joining(",")) + "})";
-                    fn.getCode().add(md.getReturnType().equals("V") ? invoke : ("table.insert(s,1," + invoke + ")"));
+                    fn.getCode().add("table.insert(s,1,v.invoke(t,\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "table.remove(s," + (params - ind + 1) + ")").collect(Collectors.joining(",")) + "}))");
+                    List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
+                    fn.getCode().add("if t.exception ~= nil then");
+                    if(exceptionTable.size() > 0) {
+                        exceptionTable.forEach(e -> {
+                            fn.getCode().add("if v.exception_type_check(\"" + e.getCatchTypeName(cf) + "\",t.exception) then");
+                            fn.getCode().add("table.remove(s,1)");
+                            fn.getCode().add("table.insert(s,1,t.exception)");
+                            fn.getCode().add("t.exception = nil");
+                            fn.getCode().add("goto ins" + (e.getHandlerPC() + 4));
+                            fn.getCode().add("end");
+                        });
+                    }
+                    fn.getCode().add("goto ret");
+                    fn.getCode().add("end");
+                    if(md.getReturnType().equals("V"))
+                        fn.getCode().add("table.remove(s,1)");
                     break;
                 }
                 case ICONST_M1:
@@ -333,21 +348,25 @@ public class JavaToLuaTranspiler {
                 case AASTORE:
                     fn.getCode().add("table.remove(s,2).values[table.remove(s,1).value+1] = table.remove(s,1)");
                     break;
+                case GOTO:
+                    fn.getCode().add("goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()));
+                    break;
                 case IFEQ:
-                    fn.getCode().add("if table.remove(s,1) == 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getOffset()) + " end");
+                    fn.getCode().add("if table.remove(s,1) == 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
                     break;
                 case IFNE:
-                    fn.getCode().add("if table.remove(s,1) ~= 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getOffset()) + " end");
+                    fn.getCode().add("if table.remove(s,1) ~= 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
                     break;
                 case IFNULL:
-                    fn.getCode().add("if table.remove(s,1) == nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getOffset()) + " end");
+                    fn.getCode().add("if table.remove(s,1) == nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
                     break;
                 case IFNONNULL:
-                    fn.getCode().add("if table.remove(s,1) ~= nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getOffset()) + " end");
+                    fn.getCode().add("if table.remove(s,1) ~= nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
                     break;
                 case ATHROW:
                     fn.getCode().add("t.exception = table.remove(s,1)");
-                    fn.getCode().add("error(\"JavaException\")");
+                    fn.getCode().add("table.insert(s,1,nil)");
+                    fn.getCode().add("goto ret");
                     break;
                 case GETFIELD: {
                     FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());

@@ -97,7 +97,7 @@ public enum OpCode {
     FSUB(0x66, 0, Instruction::new),
     GETFIELD(0xb4, 2, WideIndexInstruction::new),
     GETSTATIC(0xb2, 2, WideIndexInstruction::new),
-    GOTO(0xa7, 2, Instruction::new),
+    GOTO(0xa7, 2, WideIndexInstruction::new),
     GOTO_W(0xc8, 4, Instruction::new),
     I2B(0x91, 0, Instruction::new),
     I2C(0x92, 0, Instruction::new),

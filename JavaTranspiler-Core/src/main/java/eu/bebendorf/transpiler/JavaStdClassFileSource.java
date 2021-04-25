@@ -25,6 +25,8 @@ public class JavaStdClassFileSource implements JavaClassFileSource {
                     uc.setString(translate(uc.getString()));
                 }
             }
+            cf.getMethods().forEach(m -> m.setDescriptor(translate(m.getDescriptor())));
+            cf.getFields().forEach(f -> f.setDescriptor(translate(f.getDescriptor())));
             return cf;
         }).collect(Collectors.toList());
     }
@@ -39,6 +41,8 @@ public class JavaStdClassFileSource implements JavaClassFileSource {
         }
         if(source.startsWith("["))
             return "[" + translate(source.substring(1));
+        if(source.startsWith("Lstd/"))
+            return "L" + source.substring(5);
         if(source.startsWith("std/"))
             return source.substring(4);
         return source;

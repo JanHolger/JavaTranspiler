@@ -8,7 +8,11 @@ code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/io/OutputStream","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/OutputStream","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -45,7 +49,11 @@ code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -84,7 +92,11 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/Object;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/Object;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,l[1])
 ::ins10::
@@ -93,7 +105,11 @@ class = "java/lang/String",
 value = "\n"
 })
 ::ins12::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins15::
 table.insert(s,1,nil)
 goto ret
@@ -117,7 +133,11 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,l[1])
 ::ins10::
@@ -126,7 +146,11 @@ class = "java/lang/String",
 value = "\n"
 })
 ::ins12::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins15::
 table.insert(s,1,nil)
 goto ret
@@ -150,7 +174,11 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-v.invoke(t,"java/io/PrintStream","print","(I)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(I)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,l[1])
 ::ins10::
@@ -159,7 +187,11 @@ class = "java/lang/String",
 value = "\n"
 })
 ::ins12::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins15::
 table.insert(s,1,nil)
 goto ret
@@ -186,8 +218,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -212,8 +251,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(F)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -238,8 +284,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(D)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -264,8 +317,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(C)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -290,8 +350,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(J)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -316,8 +383,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Z)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -356,8 +430,15 @@ table.insert(s,1,l[1])
 table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(I)Ljava/lang/String;",{table.remove(s,2)}))
+if t.exception ~= nil then
+goto ret
+end
 ::ins9::
-v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/PrintStream","print","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins12::
 table.insert(s,1,nil)
 goto ret
@@ -381,7 +462,11 @@ code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/io/FilterOutputStream","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/io/FilterOutputStream","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -413,12 +498,44 @@ v.classes["java/lang/Exception"] = {
 super = "java/lang/Throwable",
 methods = {
 ["<init>"] = {
+["(Ljava/lang/Throwable;)V"] = {
+code = function(v,t,l,s)
+::ins4::
+table.insert(s,1,l[1])
+::ins5::
+table.insert(s,1,l[2])
+::ins6::
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","(Ljava/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
+::ins9::
+table.insert(s,1,nil)
+goto ret
+::ret::
+return table.remove(s,1)
+end,
+name = "<init>",
+flags = {
+private = false,
+static = false,
+protected = false,
+public = true,
+native = false
+},
+descriptor = "(Ljava/lang/Throwable;)V"
+},
 ["()V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Throwable","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -435,31 +552,7 @@ native = false
 },
 descriptor = "()V"
 },
-["(Lstd/java/lang/String;)V"] = {
-code = function(v,t,l,s)
-::ins4::
-table.insert(s,1,l[1])
-::ins5::
-table.insert(s,1,l[2])
-::ins6::
-v.invoke(t,"java/lang/Throwable","<init>","(Lstd/java/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
-::ins9::
-table.insert(s,1,nil)
-goto ret
-::ret::
-return table.remove(s,1)
-end,
-name = "<init>",
-flags = {
-private = false,
-static = false,
-protected = false,
-public = true,
-native = false
-},
-descriptor = "(Lstd/java/lang/String;)V"
-},
-["(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"] = {
+["(Ljava/lang/String;Ljava/lang/Throwable;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
@@ -468,7 +561,11 @@ table.insert(s,1,l[2])
 ::ins6::
 table.insert(s,1,l[3])
 ::ins7::
-v.invoke(t,"java/lang/Throwable","<init>","(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins10::
 table.insert(s,1,nil)
 goto ret
@@ -483,16 +580,20 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;Ljava/lang/Throwable;)V"
 },
-["(Lstd/java/lang/Throwable;)V"] = {
+["(Ljava/lang/String;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-v.invoke(t,"java/lang/Throwable","<init>","(Lstd/java/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,nil)
 goto ret
@@ -507,7 +608,7 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;)V"
 }
 }
 },
@@ -524,12 +625,44 @@ v.classes["java/lang/RuntimeException"] = {
 super = "java/lang/Exception",
 methods = {
 ["<init>"] = {
+["(Ljava/lang/Throwable;)V"] = {
+code = function(v,t,l,s)
+::ins4::
+table.insert(s,1,l[1])
+::ins5::
+table.insert(s,1,l[2])
+::ins6::
+table.insert(s,1,v.invoke(t,"java/lang/Exception","<init>","(Ljava/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
+::ins9::
+table.insert(s,1,nil)
+goto ret
+::ret::
+return table.remove(s,1)
+end,
+name = "<init>",
+flags = {
+private = false,
+static = false,
+protected = false,
+public = true,
+native = false
+},
+descriptor = "(Ljava/lang/Throwable;)V"
+},
 ["()V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Exception","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Exception","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -546,38 +679,18 @@ native = false
 },
 descriptor = "()V"
 },
-["(Lstd/java/lang/String;)V"] = {
-code = function(v,t,l,s)
-::ins4::
-table.insert(s,1,l[1])
-::ins5::
-table.insert(s,1,l[2])
-::ins6::
-v.invoke(t,"java/lang/Exception","<init>","(Lstd/java/lang/String;)V",{table.remove(s,2),table.remove(s,1)})
-::ins9::
-table.insert(s,1,nil)
-goto ret
-::ret::
-return table.remove(s,1)
-end,
-name = "<init>",
-flags = {
-private = false,
-static = false,
-protected = false,
-public = true,
-native = false
-},
-descriptor = "(Lstd/java/lang/String;)V"
-},
-["(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"] = {
+["(Ljava/lang/String;Ljava/lang/Throwable;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[3])
 ::ins6::
-v.invoke(t,"java/lang/Exception","<init>","(Lstd/java/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Exception","<init>","(Ljava/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,nil)
 goto ret
@@ -592,16 +705,20 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;Ljava/lang/Throwable;)V"
 },
-["(Lstd/java/lang/Throwable;)V"] = {
+["(Ljava/lang/String;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-v.invoke(t,"java/lang/Exception","<init>","(Lstd/java/lang/Throwable;)V",{table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Exception","<init>","(Ljava/lang/String;)V",{table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins9::
 table.insert(s,1,nil)
 goto ret
@@ -616,7 +733,7 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;)V"
 }
 }
 },
@@ -633,7 +750,7 @@ v.classes["java/lang/String"] = {
 super = "java/lang/Object",
 methods = {
 valueOf = {
-["(D)Lstd/java/lang/String;"] = {
+["(I)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
 return tostring(l[1].value)
 end,
@@ -645,9 +762,9 @@ protected = false,
 public = true,
 native = true
 },
-descriptor = "(D)Lstd/java/lang/String;"
+descriptor = "(I)Ljava/lang/String;"
 },
-["(F)Lstd/java/lang/String;"] = {
+["(J)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
 return tostring(l[1].value)
 end,
@@ -659,9 +776,9 @@ protected = false,
 public = true,
 native = true
 },
-descriptor = "(F)Lstd/java/lang/String;"
+descriptor = "(J)Ljava/lang/String;"
 },
-["(J)Lstd/java/lang/String;"] = {
+["(F)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
 return tostring(l[1].value)
 end,
@@ -673,9 +790,9 @@ protected = false,
 public = true,
 native = true
 },
-descriptor = "(J)Lstd/java/lang/String;"
+descriptor = "(F)Ljava/lang/String;"
 },
-["(I)Lstd/java/lang/String;"] = {
+["(D)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
 return tostring(l[1].value)
 end,
@@ -687,7 +804,7 @@ protected = false,
 public = true,
 native = true
 },
-descriptor = "(I)Lstd/java/lang/String;"
+descriptor = "(D)Ljava/lang/String;"
 }
 },
 ["<init>"] = {
@@ -696,7 +813,11 @@ code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -733,7 +854,11 @@ code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -765,7 +890,7 @@ v.classes["java/lang/Throwable"] = {
 super = "java/lang/Object",
 methods = {
 getMessage = {
-["()Lstd/java/lang/String;"] = {
+["()Ljava/lang/String;"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
@@ -784,16 +909,50 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "()Lstd/java/lang/String;"
+descriptor = "()Ljava/lang/String;"
 }
 },
 ["<init>"] = {
+["(Ljava/lang/Throwable;)V"] = {
+code = function(v,t,l,s)
+::ins4::
+table.insert(s,1,l[1])
+::ins5::
+table.insert(s,1,nil)
+::ins6::
+table.insert(s,1,l[2])
+::ins7::
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
+::ins10::
+table.insert(s,1,nil)
+goto ret
+::ret::
+return table.remove(s,1)
+end,
+name = "<init>",
+flags = {
+private = false,
+static = false,
+protected = false,
+public = true,
+native = false
+},
+descriptor = "(Ljava/lang/Throwable;)V"
+},
 ["()V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,nil)
 goto ret
@@ -810,38 +969,16 @@ native = false
 },
 descriptor = "()V"
 },
-["(Lstd/java/lang/String;)V"] = {
+["(Ljava/lang/String;Ljava/lang/Throwable;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-table.insert(s,1,l[2])
-::ins6::
-table.insert(s,1,nil)
-::ins7::
-v.invoke(t,"java/lang/Throwable","<init>","(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)})
-::ins10::
-table.insert(s,1,nil)
+table.insert(s,1,v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)}))
+if t.exception ~= nil then
 goto ret
-::ret::
-return table.remove(s,1)
-end,
-name = "<init>",
-flags = {
-private = false,
-static = false,
-protected = false,
-public = true,
-native = false
-},
-descriptor = "(Lstd/java/lang/String;)V"
-},
-["(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"] = {
-code = function(v,t,l,s)
-::ins4::
-table.insert(s,1,l[1])
-::ins5::
-v.invoke(t,"java/lang/Object","<init>","()V",{table.remove(s,1)})
+end
+table.remove(s,1)
 ::ins8::
 table.insert(s,1,l[1])
 ::ins9::
@@ -868,18 +1005,22 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;Ljava/lang/Throwable;)V"
 },
-["(Lstd/java/lang/Throwable;)V"] = {
+["(Ljava/lang/String;)V"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
 ::ins5::
-table.insert(s,1,nil)
-::ins6::
 table.insert(s,1,l[2])
+::ins6::
+table.insert(s,1,nil)
 ::ins7::
-v.invoke(t,"java/lang/Throwable","<init>","(Lstd/java/lang/String;Lstd/java/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)})
+table.insert(s,1,v.invoke(t,"java/lang/Throwable","<init>","(Ljava/lang/String;Ljava/lang/Throwable;)V",{table.remove(s,3),table.remove(s,2),table.remove(s,1)}))
+if t.exception ~= nil then
+goto ret
+end
+table.remove(s,1)
 ::ins10::
 table.insert(s,1,nil)
 goto ret
@@ -894,11 +1035,11 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "(Lstd/java/lang/Throwable;)V"
+descriptor = "(Ljava/lang/String;)V"
 }
 },
 getCause = {
-["()Lstd/java/lang/Throwable;"] = {
+["()Ljava/lang/Throwable;"] = {
 code = function(v,t,l,s)
 ::ins4::
 table.insert(s,1,l[1])
@@ -917,7 +1058,7 @@ protected = false,
 public = true,
 native = false
 },
-descriptor = "()Lstd/java/lang/Throwable;"
+descriptor = "()Ljava/lang/Throwable;"
 }
 }
 },

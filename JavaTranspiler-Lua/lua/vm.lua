@@ -53,6 +53,9 @@ return function()
     vm.putfield = function(thread, class, field, instance, value)
         instance.fields[field] = value
     end
+    vm.exception_type_check = function(type, exception)
+        return exception.class == type
+    end
     vm.main = function(class, ...)
         local thread = vm.newthread("Main")
         local args = {...}
@@ -61,6 +64,10 @@ return function()
             table.insert(ca[1].values, { class="java/lang/String", value=a })
         end
         vm.invoke(thread,class,'main','([Ljava/lang/String;)V', ca)
+        if thread.exception ~= nil then
+            print(thread.exception.class)
+            print(thread.exception.fields.message.value)
+        end
     end
     vm.invoke = function(thread, class, method, descriptor, args)
         local stack = {}
