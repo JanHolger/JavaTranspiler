@@ -55,6 +55,10 @@ class VM {
          $this->classes[$class]['static'][$field] = $value;
     }
 
+    public function exception_type_check($type, $exception) {
+        return $exception["class"] == $type;
+    }
+
     public function main($class, ...$args) {
         $thread = $this->newthread("Main");
         $ca = [["values" => []]];

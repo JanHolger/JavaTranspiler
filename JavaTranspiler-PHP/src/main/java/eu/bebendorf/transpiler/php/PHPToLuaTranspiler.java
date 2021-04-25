@@ -5,6 +5,8 @@ import eu.bebendorf.bytecodemanipulator.ClassFile;
 import eu.bebendorf.bytecodemanipulator.MethodDescriptor;
 import eu.bebendorf.bytecodemanipulator.attribute.AnnotationInfo;
 import eu.bebendorf.bytecodemanipulator.attribute.AnnotationsAttribute;
+import eu.bebendorf.bytecodemanipulator.attribute.CodeAttribute;
+import eu.bebendorf.bytecodemanipulator.attribute.ExceptionTableEntry;
 import eu.bebendorf.bytecodemanipulator.constant.*;
 import eu.bebendorf.bytecodemanipulator.instruction.*;
 import eu.bebendorf.transpiler.php.generator.PHPArray;
@@ -57,7 +59,7 @@ public class PHPToLuaTranspiler {
             m.getAttributes().forEach(a -> {
                 String aName = a.getName();
                 if(aName.equalsIgnoreCase("code"))
-                    mt.set("code", codeToPHP(file, a.asCode().getCode()));
+                    mt.set("code", codeToPHP(file, a.asCode()));
                 if(aName.equalsIgnoreCase("runtimevisibleannotations")) {
                     // Add Annotations for later reflection
                 }
@@ -78,9 +80,9 @@ public class PHPToLuaTranspiler {
         return ct;
     }
 
-    private static PHPFunction codeToPHP(ClassFile cf, byte[] code) {
+    private static PHPFunction codeToPHP(ClassFile cf, CodeAttribute attr) {
         PHPFunction fn = new PHPFunction("v", "t", "l", "s");
-        List<Instruction> instructions = CodeParser.parse(code);
+        List<Instruction> instructions = CodeParser.parse(attr.getCode());
         for(int i=0; i<instructions.size(); i++) {
             Instruction ins = instructions.get(i);
             if(ins.getCode() == OpCode.NOP)
@@ -267,9 +269,25 @@ public class PHPToLuaTranspiler {
                 case INVOKEVIRTUAL: {
                     MethodRefConstant mr = cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex()).asMethod();
                     String descriptor = mr.getDescriptor(cf);
+                    MethodDescriptor md = new MethodDescriptor(descriptor);
                     int params = new MethodDescriptor(descriptor).getParameterTypes().size();
-                    // TODO
                     fn.getCode().add("array_unshift($s,$v->invoke($t, \"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",[" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "array_unshift($s," + (params - ind) + ")").collect(Collectors.joining(",")) + "]));");
+                    List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
+                    fn.getCode().add("if (array_key_exists(\"exception\", $t)) {");
+                    if (exceptionTable.size() > 0) {
+                        exceptionTable.forEach(e -> {
+                            fn.getCode().add("if ($v->exception_type_check(\"" + e.getCatchTypeName(cf) + "\",$t[\"exception\"])) {");
+                            fn.getCode().add("array_shift($s);");
+                            fn.getCode().add("array_unshift($s, $t[\"exception\"]);");
+                            fn.getCode().add("$t[\"exception\"] = NULL;");
+                            fn.getCode().add("goto ins" + (e.getHandlerPC() + 4) + ";");
+                            fn.getCode().add("}");
+                        });
+                    }
+                    fn.getCode().add("goto ret;");
+                    fn.getCode().add("}");
+                    if(md.getReturnType().equals("V"))
+                        fn.getCode().add("array_shift($s);");
                     break;
                 }
                 case ICONST_M1:
@@ -344,7 +362,9 @@ public class PHPToLuaTranspiler {
                     fn.getCode().add("if (array_shift($s) != NULL) goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + ";");
                     break;
                 case ATHROW:
-                    fn.getCode().add("throw new Exception(array_shift($s));");
+                    fn.getCode().add("$t[\"exception\"] = array_shift($s);");
+                    fn.getCode().add("array_unshift($s, NULL);");
+                    fn.getCode().add("goto ret;");
                     break;
                 default:
                     fn.getCode().add("// " + ins.getCode().name());

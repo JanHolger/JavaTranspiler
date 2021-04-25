@@ -28,8 +28,14 @@ array_unshift($s,[
 ]);
 ins15:
 array_unshift($s,$v->invoke($t, "java/lang/RuntimeException","<init>","(Ljava/lang/String;)V",[array_unshift($s,1),array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+goto ret;
+}
+array_shift($s);
 ins18:
-throw new Exception(array_shift($s));
+$t["exception"] = array_shift($s);
+array_unshift($s, NULL);
+goto ret;
 ins19:
 array_unshift($s,$v->getstatic($t, "java/lang/System","out"));
 ins22:
@@ -43,6 +49,10 @@ ins24:
 array_unshift($s,array_splice($s,1,1)[0]["value"][array_shift($s)["value"]]);
 ins25:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","println","(Ljava/lang/String;)V",[array_unshift($s,1),array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+goto ret;
+}
+array_shift($s);
 ins28:
 array_unshift($s, NULL);
 goto ret;
@@ -69,6 +79,16 @@ ins7:
 array_unshift($s,$l[0]);
 ins8:
 array_unshift($s,$v->invoke($t, "Test","test","([Ljava/lang/String;)V",[array_unshift($s,1),array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+if ($v->exception_type_check("java/lang/RuntimeException",$t["exception"])) {
+array_shift($s);
+array_unshift($s, $t["exception"]);
+$t["exception"] = NULL;
+goto ins14;
+}
+goto ret;
+}
+array_shift($s);
 ins11:
 // GOTO
 ins14:
@@ -82,6 +102,10 @@ array_unshift($s,[
 ]);
 ins20:
 array_unshift($s,$v->invoke($t, "java/io/PrintStream","println","(Ljava/lang/String;)V",[array_unshift($s,1),array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+goto ret;
+}
+array_shift($s);
 ins23:
 array_unshift($s, NULL);
 goto ret;
@@ -106,6 +130,10 @@ ins4:
 array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$v->invoke($t, "java/lang/Object","<init>","()V",[array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+goto ret;
+}
+array_shift($s);
 ins8:
 array_unshift($s, NULL);
 goto ret;
@@ -137,6 +165,10 @@ ins7:
 array_unshift($s, $s[0]);
 ins8:
 array_unshift($s,$v->invoke($t, "Test","<init>","()V",[array_unshift($s,0)]));
+if (array_key_exists("exception", $t)) {
+goto ret;
+}
+array_shift($s);
 ins11:
 $v->setstatic($t, "Test","test",array_unshift($s));
 ins14:
