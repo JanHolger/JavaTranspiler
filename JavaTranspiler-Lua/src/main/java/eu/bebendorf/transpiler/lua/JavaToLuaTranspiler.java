@@ -111,19 +111,19 @@ public class JavaToLuaTranspiler {
                     LuaValue value;
                     switch (c.getTag()) {
                         case LONG:
-                            value = new LuaTable().setString("class", "long").setNumber("value", ((LongConstant) c).getValue());
+                            value = new LuaTable().setString("type", "J").setNumber("value", ((LongConstant) c).getValue());
                             break;
                         case INTEGER:
-                            value = new LuaTable().setString("class", "int").setNumber("value", ((IntegerConstant) c).getValue());
+                            value = new LuaTable().setString("type", "I").setNumber("value", ((IntegerConstant) c).getValue());
                             break;
                         case DOUBLE:
-                            value = new LuaTable().setString("class", "double").setNumber("value", ((DoubleConstant) c).getValue());
+                            value = new LuaTable().setString("type", "D").setNumber("value", ((DoubleConstant) c).getValue());
                             break;
                         case FLOAT:
-                            value = new LuaTable().setString("class", "float").setNumber("value", ((FloatConstant) c).getValue());
+                            value = new LuaTable().setString("type", "F").setNumber("value", ((FloatConstant) c).getValue());
                             break;
                         case STRING:
-                            value = new LuaTable().setString("class", "java/lang/String").setString("value", ((StringConstant) c).getString(cf));
+                            value = new LuaTable().setString("type", "Ljava/lang/String;").setString("value", ((StringConstant) c).getString(cf));
                             break;
                         default:
                             throw new RuntimeException("Unknown lua constant type: " + c.getTag().name());
@@ -198,70 +198,70 @@ public class JavaToLuaTranspiler {
                     break;
                 }
                 case LUSHR:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value >> table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value >> table.remove(s,1).value")).toLua() + ")");
                     break;
                 case IUSHR:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value >> table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value >> table.remove(s,1).value")).toLua() + ")");
                     break;
                 case LADD:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
                     break;
                 case IADD:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
                     break;
                 case DADD:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
                     break;
                 case FADD:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").set("value", new LuaExpression("table.remove(s,2).value + table.remove(s,1).value")).toLua() + ")");
                     break;
                 case LSUB:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
                     break;
                 case ISUB:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
                     break;
                 case DSUB:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
                     break;
                 case FSUB:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").set("value", new LuaExpression("table.remove(s,2).value - table.remove(s,1).value")).toLua() + ")");
                     break;
                 case LMUL:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
                     break;
                 case IMUL:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
                     break;
                 case DMUL:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
                     break;
                 case FMUL:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").set("value", new LuaExpression("table.remove(s,2).value * table.remove(s,1).value")).toLua() + ")");
                     break;
                 case LDIV:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value // table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value // table.remove(s,1).value")).toLua() + ")");
                     break;
                 case IDIV:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value // table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value // table.remove(s,1).value")).toLua() + ")");
                     break;
                 case DDIV:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").set("value", new LuaExpression("table.remove(s,2).value / table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").set("value", new LuaExpression("table.remove(s,2).value / table.remove(s,1).value")).toLua() + ")");
                     break;
                 case FDIV:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").set("value", new LuaExpression("table.remove(s,2).value / table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").set("value", new LuaExpression("table.remove(s,2).value / table.remove(s,1).value")).toLua() + ")");
                     break;
                 case LREM:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
                     break;
                 case IREM:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
                     break;
                 case DREM:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
                     break;
                 case FREM:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").set("value", new LuaExpression("table.remove(s,2).value % table.remove(s,1).value")).toLua() + ")");
                     break;
                 case INVOKESPECIAL:
                 case INVOKESTATIC:
@@ -275,7 +275,7 @@ public class JavaToLuaTranspiler {
                     fn.getCode().add("if t.exception ~= nil then");
                     if(exceptionTable.size() > 0) {
                         exceptionTable.forEach(e -> {
-                            fn.getCode().add("if v.exception_type_check(\"" + e.getCatchTypeName(cf) + "\",t.exception) then");
+                            fn.getCode().add("if v.instanceof(t,t.exception,\"L" + e.getCatchTypeName(cf) + ";\").value == 1 then");
                             fn.getCode().add("table.remove(s,1)");
                             fn.getCode().add("table.insert(s,1,t.exception)");
                             fn.getCode().add("t.exception = nil");
@@ -297,39 +297,39 @@ public class JavaToLuaTranspiler {
                 case ICONST_4:
                 case ICONST_5: {
                     int value = Integer.parseInt(ins.getCode().name().substring(7).replace('M', '-'));
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").setNumber("value", value).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").setNumber("value", value).toLua() + ")");
                     break;
                 }
                 case LCONST_0:
                 case LCONST_1: {
                     long value = Long.parseLong(ins.getCode().name().substring(7));
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "long").setNumber("value", value).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "J").setNumber("value", value).toLua() + ")");
                     break;
                 }
                 case DCONST_0:
                 case DCONST_1: {
                     double value = Double.parseDouble(ins.getCode().name().substring(7));
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "double").setNumber("value", value).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "D").setNumber("value", value).toLua() + ")");
                     break;
                 }
                 case FCONST_0:
                 case FCONST_1:
                 case FCONST_2: {
                     float value = Float.parseFloat(ins.getCode().name().substring(7));
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "float").setNumber("value", value).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "F").setNumber("value", value).toLua() + ")");
                     break;
                 }
                 case ACONST_NULL:
                     fn.getCode().add("table.insert(s,1,nil)");
                     break;
                 case BIPUSH:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").setNumber("value", ins.getBytes()[0]).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").setNumber("value", ins.getBytes()[0]).toLua() + ")");
                     break;
                 case SIPUSH:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", "int").setNumber("value", ByteCodeHelper.toSignedShort(ins.getBytes())).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "I").setNumber("value", ByteCodeHelper.toSignedShort(ins.getBytes())).toLua() + ")");
                     break;
                 case NEW:
-                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("class", cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex()).asClass().getName(cf)).set("fields", new LuaTable()).toLua() + ")");
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "L" + cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex()).asClass().getName(cf) + ";").set("fields", new LuaTable()).toLua() + ")");
                     break;
                 case DUP:
                     fn.getCode().add("table.insert(s,1,s[1])");
@@ -376,6 +376,40 @@ public class JavaToLuaTranspiler {
                 case PUTFIELD: {
                     FieldRefConstant fr = (FieldRefConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
                     fn.getCode().add("v.putfield(t,\"" + fr.getClassName(cf) + "\",\"" + fr.getName(cf) + "\",table.remove(s,2),table.remove(s,1))");
+                    break;
+                }
+                case ANEWARRAY: {
+                    ClassConstant cc = (ClassConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", "[L" + cc.getName(cf) + ";").set("length", new LuaExpression("table.remove(s,1)")).set("values", new LuaTable()).toLua() + ")");
+                }
+                case D2I:
+                case D2L:
+                case F2I:
+                case F2L:
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", ins.getCode().name().substring(2,3)).set("value", new LuaExpression("math.floor(table.remove(s,1).value)")).toLua() + ")");
+                    break;
+                case D2F:
+                case F2D:
+                case I2L:
+                case L2I:
+                case L2D:
+                case L2F:
+                case I2D:
+                case I2F:
+                case I2B:
+                case I2S:
+                case I2C:
+                    fn.getCode().add("table.insert(s,1," + new LuaTable().setString("type", ins.getCode().name().substring(2,3)).set("value", new LuaExpression("table.remove(s,1).value")).toLua() + ")");
+                    break;
+                case POP:
+                    fn.getCode().add("table.remove(s,1)");
+                    break;
+                case POP2:
+                    fn.getCode().add("if s[1] == nil or (s[1].type ~= \"D\" and s[1].type ~= \"L\") then table.remove(s,1) end");
+                    fn.getCode().add("table.remove(s,1)");
+                case INSTANCEOF: {
+                    ClassConstant cc = (ClassConstant) cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex());
+                    fn.getCode().add("table.insert(s,1,v.instanceof(t,table.remove(s,1),\"L" + cc.getName(cf) + ";\"))");
                     break;
                 }
                 default:

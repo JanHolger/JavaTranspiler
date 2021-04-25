@@ -20,7 +20,7 @@ public enum OpCode {
     ALOAD_1(0x2b, 0, Instruction::new),
     ALOAD_2(0x2c, 0, Instruction::new),
     ALOAD_3(0x2d, 0, Instruction::new),
-    ANEWARRAY(0xbd, 2, Instruction::new),
+    ANEWARRAY(0xbd, 2, WideIndexInstruction::new),
     ARETURN(0xb0, 0, Instruction::new),
     ARRAYLENGTH(0xbe, 0, Instruction::new),
     ASTORE(0x3a, 1, Instruction::new),

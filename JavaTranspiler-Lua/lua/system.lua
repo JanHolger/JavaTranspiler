@@ -101,7 +101,7 @@ table.remove(s,1)
 table.insert(s,1,l[1])
 ::ins10::
 table.insert(s,1,{
-class = "java/lang/String",
+type = "Ljava/lang/String;",
 value = "\n"
 })
 ::ins12::
@@ -142,7 +142,7 @@ table.remove(s,1)
 table.insert(s,1,l[1])
 ::ins10::
 table.insert(s,1,{
-class = "java/lang/String",
+type = "Ljava/lang/String;",
 value = "\n"
 })
 ::ins12::
@@ -183,7 +183,7 @@ table.remove(s,1)
 table.insert(s,1,l[1])
 ::ins10::
 table.insert(s,1,{
-class = "java/lang/String",
+type = "Ljava/lang/String;",
 value = "\n"
 })
 ::ins12::
