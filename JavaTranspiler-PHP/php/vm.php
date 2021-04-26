@@ -25,6 +25,13 @@ class VM {
         ];
     }
 
+    public function newstring($value) {
+        return [
+            'type' => 'Ljava/lang/String;',
+            'value' => $value
+        ];
+    }
+
     public function getclass(&$thread, $name) {
         if (!array_key_exists($name,$this->classes)) {
             echo "CLASS NOT FOUND! ".$name;

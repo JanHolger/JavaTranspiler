@@ -217,7 +217,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -250,7 +250,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(F)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(F)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -283,7 +283,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(D)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(D)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -316,7 +316,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(C)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(C)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -349,7 +349,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(J)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(J)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -382,7 +382,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Z)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(Z)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -429,7 +429,7 @@ table.insert(s,1,l[1])
 ::ins5::
 table.insert(s,1,l[2])
 ::ins6::
-table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(I)Ljava/lang/String;",{table.remove(s,2)}))
+table.insert(s,1,v.invoke(t,"java/lang/String","valueOf","(I)Ljava/lang/String;",{table.remove(s,1)}))
 if t.exception ~= nil then
 goto ret
 end
@@ -752,7 +752,7 @@ methods = {
 valueOf = {
 ["(I)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
-return tostring(l[1].value)
+return v.newstring(tostring(l[1].value))
 end,
 name = "valueOf",
 flags = {
@@ -766,7 +766,7 @@ descriptor = "(I)Ljava/lang/String;"
 },
 ["(J)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
-return tostring(l[1].value)
+return v.newstring(tostring(l[1].value))
 end,
 name = "valueOf",
 flags = {
@@ -780,7 +780,7 @@ descriptor = "(J)Ljava/lang/String;"
 },
 ["(F)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
-return tostring(l[1].value)
+return v.newstring(tostring(l[1].value))
 end,
 name = "valueOf",
 flags = {
@@ -794,7 +794,7 @@ descriptor = "(F)Ljava/lang/String;"
 },
 ["(D)Ljava/lang/String;"] = {
 code = function(v,t,l,s)
-return tostring(l[1].value)
+return v.newstring(tostring(l[1].value))
 end,
 name = "valueOf",
 flags = {

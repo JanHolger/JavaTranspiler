@@ -218,7 +218,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Ljava/lang/Object;)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -251,7 +251,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(F)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(F)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -284,7 +284,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(D)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(D)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -317,7 +317,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(C)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(C)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -350,7 +350,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(J)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(J)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -383,7 +383,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Z)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(Z)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -430,7 +430,7 @@ array_unshift($s,$l[0]);
 ins5:
 array_unshift($s,$l[1]);
 ins6:
-array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(I)Ljava/lang/String;",[array_splice($s,1,1)[0]]));
+array_unshift($s,$v->invoke($t, "java/lang/String","valueOf","(I)Ljava/lang/String;",[array_splice($s,0,1)[0]]));
 if ($t['exception'] != NULL) {
 goto ret;
 }
@@ -753,7 +753,7 @@ $v->classes["java/lang/String"] = [
 "valueOf" => [
 "(I)Ljava/lang/String;" => [
 "code" => function($v,$t,$l,$s){
-return strval($l[0]["value"]);
+return $v->newstring(strval($l[0]['value']));
 },
 "name" => "valueOf",
 "flags" => [
@@ -767,7 +767,7 @@ return strval($l[0]["value"]);
 ],
 "(J)Ljava/lang/String;" => [
 "code" => function($v,$t,$l,$s){
-return strval($l[0]["value"]);
+return $v->newstring(strval($l[0]['value']));
 },
 "name" => "valueOf",
 "flags" => [
@@ -781,7 +781,7 @@ return strval($l[0]["value"]);
 ],
 "(F)Ljava/lang/String;" => [
 "code" => function($v,$t,$l,$s){
-return strval($l[0]["value"]);
+return $v->newstring(strval($l[0]['value']));
 },
 "name" => "valueOf",
 "flags" => [
@@ -795,7 +795,7 @@ return strval($l[0]["value"]);
 ],
 "(D)Ljava/lang/String;" => [
 "code" => function($v,$t,$l,$s){
-return strval($l[0]["value"]);
+return $v->newstring(strval($l[0]['value']));
 },
 "name" => "valueOf",
 "flags" => [

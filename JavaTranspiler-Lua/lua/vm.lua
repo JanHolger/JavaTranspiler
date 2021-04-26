@@ -66,6 +66,12 @@ return function()
             value = isi
         }
     end
+    vm.newstring = function(value)
+        return {
+            type = 'Ljava/lang/String;',
+            value = value
+        }
+    end
     vm.main = function(class, ...)
         local thread = vm.newthread("Main")
         local args = {...}

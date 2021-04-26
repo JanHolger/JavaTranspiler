@@ -122,7 +122,7 @@ public enum OpCode {
     IF_ICMPEQ(0x9f, 2, WideIndexInstruction::new),
     IF_ICMPGE(0xa2, 2, WideIndexInstruction::new),
     IF_ICMPGT(0xa3, 2, WideIndexInstruction::new),
-    IF_ICMPLE(0xa5, 2, WideIndexInstruction::new),
+    IF_ICMPLE(0xa4, 2, WideIndexInstruction::new),
     IF_ICMPLT(0xa1, 2, WideIndexInstruction::new),
     IF_ICMPNE(0xa0, 2, WideIndexInstruction::new),
     IFEQ(0x99, 2, WideIndexInstruction::new),

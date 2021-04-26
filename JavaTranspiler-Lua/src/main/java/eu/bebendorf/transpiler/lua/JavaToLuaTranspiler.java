@@ -269,8 +269,8 @@ public class JavaToLuaTranspiler {
                     MethodRefConstant mr = cf.getConstantPool().getConstant(((WideIndexInstruction) ins).getIndex()).asMethod();
                     String descriptor = mr.getDescriptor(cf);
                     MethodDescriptor md = new MethodDescriptor(descriptor);
-                    int params = md.getParameterTypes().size();
-                    fn.getCode().add("table.insert(s,1,v.invoke(t,\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1)).mapToObj(ind -> "table.remove(s," + (params - ind + 1) + ")").collect(Collectors.joining(",")) + "}))");
+                    int params = md.getParameterTypes().size() + (ins.getCode() == OpCode.INVOKESTATIC ? 0 : 1);
+                    fn.getCode().add("table.insert(s,1,v.invoke(t,\"" + mr.getClassName(cf) + "\",\"" + mr.getName(cf) + "\",\"" + descriptor + "\",{" + IntStream.range(0, params).mapToObj(ind -> "table.remove(s," + (params - ind) + ")").collect(Collectors.joining(",")) + "}))");
                     List<ExceptionTableEntry> exceptionTable = attr.getExceptionTable().stream().filter(e -> e.getStartPC() <= (ins.getAddress() - 4) && e.getEndPC() > (ins.getAddress() - 4)).collect(Collectors.toList());
                     fn.getCode().add("if t.exception ~= nil then");
                     if(exceptionTable.size() > 0) {
@@ -362,6 +362,42 @@ public class JavaToLuaTranspiler {
                     break;
                 case IFNONNULL:
                     fn.getCode().add("if table.remove(s,1) ~= nil then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IFGE:
+                    fn.getCode().add("if table.remove(s,1) >= 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IFGT:
+                    fn.getCode().add("if table.remove(s,1) > 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IFLE:
+                    fn.getCode().add("if table.remove(s,1) <= 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IFLT:
+                    fn.getCode().add("if table.remove(s,1) < 0 then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ACMPEQ:
+                    fn.getCode().add("if table.remove(s,1) == table.remove(s,1) then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ACMPNE:
+                    fn.getCode().add("if table.remove(s,1) ~= table.remove(s,1) then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPEQ:
+                    fn.getCode().add("if table.remove(s,1).value == table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPGE:
+                    fn.getCode().add("if table.remove(s,2).value >= table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPGT:
+                    fn.getCode().add("if table.remove(s,2).value > table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPLE:
+                    fn.getCode().add("if table.remove(s,2).value <= table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPLT:
+                    fn.getCode().add("if table.remove(s,2).value < table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
+                    break;
+                case IF_ICMPNE:
+                    fn.getCode().add("if table.remove(s,1).value ~= table.remove(s,1).value then goto ins" + (((WideIndexInstruction) ins).getIndex() + ins.getAddress()) + " end");
                     break;
                 case ATHROW:
                     fn.getCode().add("t.exception = table.remove(s,1)");

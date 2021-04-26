@@ -3,6 +3,11 @@ public class Test {
     private static Test test = new Test();
 
     public static void main(String[] args) {
+        int a = 10;
+        int b = 2;
+        if(a > b)
+            System.out.println("Test");
+
         try {
             test.test(args);
         } catch (RuntimeException ex) {
