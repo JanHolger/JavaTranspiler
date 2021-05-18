@@ -1,20 +1,20 @@
 package std.java.lang;
 
-public class RuntimeException extends Exception {
+public class RuntimeException extends java.lang.Exception {
 
     public RuntimeException() {
         super();
     }
 
-    public RuntimeException(String message) {
+    public RuntimeException(java.lang.String message) {
         super(message);
     }
 
-    public RuntimeException(Throwable cause) {
+    public RuntimeException(java.lang.Throwable cause) {
         super(cause);
     }
 
-    public RuntimeException(String message, Throwable cause) {
+    public RuntimeException(java.lang.String message, java.lang.Throwable cause) {
         super(cause);
     }
 

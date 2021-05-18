@@ -1,20 +1,20 @@
 package std.java.lang;
 
-public class Exception extends Throwable {
+public class Exception extends java.lang.Throwable {
 
     public Exception() {
         super();
     }
 
-    public Exception(String message) {
+    public Exception(java.lang.String message) {
         super(message);
     }
 
-    public Exception(Throwable cause) {
+    public Exception(java.lang.Throwable cause) {
         super(cause);
     }
 
-    public Exception(String message, Throwable cause) {
+    public Exception(java.lang.String message, java.lang.Throwable cause) {
         super(message, cause);
     }
 

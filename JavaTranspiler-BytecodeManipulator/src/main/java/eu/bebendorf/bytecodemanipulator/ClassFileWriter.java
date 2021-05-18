@@ -75,6 +75,8 @@ public class ClassFileWriter {
     }
 
     private static void writeConstant(OutputStream os, Constant constant) throws IOException {
+        if(constant.getTag() == null)
+            return;
         os.write(new byte[]{ constant.getTag().getTag() });
         switch (constant.getTag()) {
             case UTF8:

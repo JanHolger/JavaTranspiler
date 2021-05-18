@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Throwable {
 
-    String message;
-    Throwable cause;
+    java.lang.String message;
+    java.lang.Throwable cause;
 
-    public Throwable(String message) {
+    public Throwable(java.lang.String message) {
         this(message, null);
     }
 
-    public Throwable(Throwable cause) {
+    public Throwable(java.lang.Throwable cause) {
         this(null, cause);
     }
 

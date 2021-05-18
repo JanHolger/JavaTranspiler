@@ -2,6 +2,8 @@ package eu.bebendorf.bytecodemanipulator;
 
 import eu.bebendorf.bytecodemanipulator.constant.Constant;
 import eu.bebendorf.bytecodemanipulator.constant.ConstantPool;
+import eu.bebendorf.bytecodemanipulator.constant.ConstantTag;
+import eu.bebendorf.bytecodemanipulator.constant.NOPConstant;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,8 +38,14 @@ public class ClassFileParser {
         int majorVersion = readUnsignedShort(bb);
         int constantPoolSize = readUnsignedShort(bb) - 1;
         ConstantPool constantPool = new ConstantPool();
-        for(int i = 0; i < constantPoolSize; i++)
-            constantPool.addConstant(Constant.read(bb));
+        for(int i = 0; i < constantPoolSize; i++){
+            Constant c = Constant.read(bb);
+            constantPool.addConstant(c);
+            if(c.getTag() == ConstantTag.LONG || c.getTag() == ConstantTag.DOUBLE) {
+                constantPool.addConstant(new NOPConstant());
+                i++;
+            }
+        }
         short accessFlags = bb.getShort();
         int classIndex = readUnsignedShort(bb);
         int superClassIndex = readUnsignedShort(bb);
